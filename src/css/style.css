@@ -1,0 +1,162 @@
+/* Police globale */
+body {
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  background: linear-gradient(135deg, #f3f4f6, #e0e0e3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+/* Titre principal */
+h1 {
+  font-family: 'Georgia', serif;
+  font-size: 2.5em;
+  font-weight: 700;
+  text-align: center;
+  color: #2c3e50;
+  margin: 20px 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Style du formulaire */
+#logoForm {
+  flex: 1;
+  max-width: 500px;
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+#logoForm label {
+  display: block;
+  margin: 12px 0 6px;
+  font-weight: 600;
+  color: #34495e;
+}
+
+#logoForm input,
+#logoForm select {
+  width: 100%;
+  padding: 12px; /* Augmentation du padding pour les champs */
+  border: 1px solid #bdc3c7;
+  border-radius: 4px;
+  font-size: 1em;
+  transition: border-color 0.3s;
+}
+
+#logoForm input:focus,
+#logoForm select:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+/* Flexbox layout pour le conteneur principal */
+#flex {
+  display: flex;
+  flex-direction: row; /* Affiche les éléments en ligne */
+  gap: 30px; /* Espace entre le formulaire et la zone d'affichage du logo */
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto; /* Centre le conteneur */
+  padding: 20px;
+}
+
+/* Affichage du logo avec dimensions augmentées */
+#logoDisplay {
+  width: 600px;
+  height: 400px;
+  border: 2px dashed #bdc3c7;
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 20px; /* Espace par rapport au haut de la page lors du défilement */
+}
+
+
+.draggable {
+  position: absolute;
+  cursor: move;
+}
+
+/*#displayMainText {
+  font-size: 2em;
+  color: #2c3e50;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 8px;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+
+#displaySubText {
+  font-size: 1.2em;
+  color: #666;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 5px;
+  border-radius: 4px;
+  transition: all 0.3s;
+}*/
+
+/* Bouton de téléchargement */
+#downloadLogo {
+  padding: 12px 25px;
+  background-color: #3498db;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-top: 15px;
+}
+
+#downloadLogo:hover {
+  background-color: #2980b9;
+  transform: scale(1.05);
+}
+
+/* Effet de survol pour le texte du logo */
+#displayMainText:hover,
+#displaySubText:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #34495e;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Adaptabilité pour les petits écrans */
+@media (max-width: 768px) {
+  #flex {
+    flex-direction: column;
+    align-items: center;
+  }
+
+/* Affichage du logo */
+#logoDisplay {
+  position: relative;
+  width: 600px; /* Largeur augmentée */
+  height: 400px; /* Hauteur augmentée */
+  border: 2px dashed #bdc3c7;
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+  #logoForm {
+    width: 100%;
+    max-width: 300px;
+  }
+}

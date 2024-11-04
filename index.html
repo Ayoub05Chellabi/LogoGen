@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LogoGenV1</title>
+  <link rel="stylesheet" href="src/css/style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="src/js/component.js"></script>
+</head>
+<body>
+  <h1>LogoGenV1</h1>
+  <div id="flex">
+    <form id="logoForm">
+      <label for="mainText">Texte principal :</label>
+      <input type="text" id="mainText" name="mainText" placeholder="Entrez le texte principal" onchange="updateLogo()" required />
+      
+      <label for="subText">Sous-texte :</label>
+      <input type="text" id="subText" name="subText" placeholder="Entrez le sous-texte" onchange="updateLogo()" />
+
+      <label for="mainTextSize">Taille du texte principal :</label>
+      <input type="range" id="mainTextSize" name="mainTextSize" min="10" max="100" value="32" onchange="updateLogo()" />
+
+      <label for="subTextSize">Taille du sous-texte :</label>
+      <input type="range" id="subTextSize" name="subTextSize" min="10" max="50" value="20" onchange="updateLogo()" />
+      
+      <!-- Choix du type de couleur pour le texte -->
+      <label for="colorType">Type de couleur pour le texte :</label>
+      <select id="colorType" name="colorType" onchange="toggleColorOptions()">
+          <option value="simple">Couleur simple</option>
+          <option value="gradient">Dégradé</option>
+      </select>
+
+      <!-- Couleur simple pour le texte -->
+      <div id="simpleColorContainer">
+          <label for="textColor">Couleur du texte :</label>
+          <input type="color" id="textColor" name="textColor" value="#18d8a8" onchange="updateLogo()" />
+      </div>
+
+      <!-- Dégradé de couleur pour le texte -->
+      <div id="gradientColorContainer" style="display: none;">
+          <label for="gradientColor1">Dégradé - Couleur 1 :</label>
+          <input type="color" id="gradientColor1" name="gradientColor1" value="#ff0000" onchange="updateLogo()" />
+          
+          <label for="gradientColor2">Dégradé - Couleur 2 :</label>
+          <input type="color" id="gradientColor2" name="gradientColor2" value="#0000ff" onchange="updateLogo()" />
+      </div>
+
+      <label for="subTextColor">Couleur du subTexte :</label>
+      <input type="color" id="subTextColor" name="subTextColor" value="#18d8a8" onchange="updateLogo()" />
+      
+      <label for="boxColor" style="display: none;">Couleur du cadre :</label>
+      <input type="color" id="boxColor" name="boxColor" value="#18d8a8" onchange="updateLogo()" style="display: none;"/>
+
+      <!-- Ombre de Texte -->
+      <label for="textShadow">Ombre de texte :</label>
+      <input type="checkbox" id="textShadowToggle" name="textShadowToggle" onchange="updateLogo()" />
+      <input type="color" id="textShadowColor" name="textShadowColor" value="#000000" onchange="updateLogo()" disabled />
+
+      <!-- Espacement des Lettres -->
+      <label for="letterSpacing">Espacement des lettres :</label>
+      <input type="range" id="letterSpacing" name="letterSpacing" min="0" max="10" value="1" onchange="updateLogo()" />
+
+      <!-- Rotation du Texte -->
+      <label for="rotation">Rotation du texte :</label>
+      <input type="range" id="rotation" name="rotation" min="-45" max="45" value="0" onchange="updateLogo()" />
+
+      <!-- Style de Bordure du Logo -->
+      <label for="borderStyle">Style de bordure du logo :</label>
+      <select id="borderStyle" name="borderStyle" onchange="updateLogo()">
+          <option value="none">Aucune</option>
+          <option value="solid">Plein</option>
+          <option value="dotted">Pointillée</option>
+          <option value="dashed">Tirets</option>
+          <option value="double">Double</option>
+      </select>
+      <input type="color" id="borderColor" name="borderColor" value="#000000" onchange="updateLogo()" />
+
+      <!-- Arrière-plan -->
+      <label for="backgroundSelect">Arrière-plan :</label>
+      <select id="backgroundSelect" name="backgroundSelect" onchange="updateLogo()">
+          <option value="">Aucun</option>
+          <option value="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExczJsYjhmMG42dmY4Ymp1NWJlcGY3a20zazFyN3AyeHBzZW9pcDJ3bCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Q34Q46x7bUUKJfbn0s/giphy-downsized-large.gif">Fond Énergie Cosmique</option>
+          <option value="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExanIxeTA4djc3b2luNGw5bjdhaHFpZnJmM2Jna21pcmNjbDF4cnAxZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/DvyxIpxw9cCuQ/giphy.gif">Fond Lumières Hypnotiques</option>
+          <option value="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZHJqNGNmaWc4czQzeXM3a2d2eWo0cWM4N3dkY282emQzMTFyOWkyMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/OK5LK5zLFfdm/giphy.gif">Fond Flammes de Feu Mystique</option>
+      </select>
+
+      <!-- Filtre de Couleur pour l’Arrière-plan -->
+      <label for="backgroundFilter">Filtre de couleur pour l’arrière-plan :</label>
+      <select id="backgroundFilter" name="backgroundFilter" onchange="updateLogo()">
+          <option value="none">Aucun</option>
+          <option value="grayscale(100%)">Noir et blanc</option>
+          <option value="sepia(100%)">Sépia</option>
+          <option value="contrast(200%)">Contraste élevé</option>
+          <option value="blur(5px)">Flou</option>
+      </select>
+
+      <!-- GIFs pour le logo -->
+      <label for="imageSelect">GIF de logo :</label>
+      <select id="imageSelect" name="imageSelect" onchange="updateLogo()">
+          <option value="">Aucun</option>
+          <option value="https://i.gifer.com/IXNp.gif">GIF Travolta Dansant</option>
+          <option value="https://i.gifer.com/4XCO.gif">GIF Père Noël</option>
+          <option value="https://i.gifer.com/PYh.gif">GIF Chat Néon</option>
+      </select>
+
+      <!-- Transparence de l'Image du Logo -->
+      <label for="imageOpacity">Transparence du GIF :</label>
+      <input type="range" id="imageOpacity" name="imageOpacity" min="0" max="1" step="0.1" value="1" onchange="updateLogo()" />
+
+      <label for="imageSize">Taille du GIF :</label>
+      <input type="range" id="imageSize" name="imageSize" min="50" max="200" value="100" onchange="updateLogo()" />
+    </form>
+
+    <div id="logoDisplay">
+      <h2 id="displayMainText" class="draggable">Votre Logo</h2>
+      <p id="displaySubText" class="draggable">Sous-titre ici</p>
+      <div id="logoImageContainer" class="draggable"></div>
+    </div>
+  </div>
+
+  <button id="downloadLogo" onclick="downloadLogo()">Télécharger le logo</button>
+  <script src="component.js"></script>
+</body>
+</html>
